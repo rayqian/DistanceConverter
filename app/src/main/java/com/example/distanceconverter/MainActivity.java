@@ -107,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
                 from = "Km";
                 to = "Mi";
             }
-            sb.append(in + " " + from + " ==> " + out + " " + to);
-            sb.append("\n");
+            sb.insert(0,in + " " + from + " ==> " + out + " " + to);
+            sb.insert(0,"\n");
             historyField.setText(sb.toString());
     }
 
