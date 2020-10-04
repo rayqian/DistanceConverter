@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DistanceConverter</string>
+    <string name="K_value_String">Kilometers value:</string>
+    <string name="M_value_String">Miles value:</string>
 </resources>
