@@ -1,21 +1,17 @@
 package com.example.distanceconverter;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "my_MainActivity_tag";
     private EditText userInput;
     private TextView inputTextView;
     private TextView outputTextView;
@@ -49,17 +45,23 @@ public class MainActivity extends AppCompatActivity {
         try{
             value = Double.parseDouble(input);
         }catch (NumberFormatException ex){
+            //handle invalid input
+        }
+        if(value == 0.0){
             Toast.makeText(this, "Please enter a valid number.", Toast.LENGTH_SHORT).show();
         }
-        //call private method to calculate the double result
-        result = calculateResult(value);
-        String output = String.format("%.1f", result);
-        //show the result to the output field
-        outputField.setText(output);
-        //clear the input field
-        userInput.setText("");
-        //store the result to history filed
-        setHistoryValues(sb, input, output);
+        else{
+            //call private method to calculate the double result
+            result = calculateResult(value);
+            String output = String.format("%.1f", result);
+            //show the result to the output field
+            outputField.setText(output);
+            //clear the input field
+            userInput.setText("");
+            //store the result to history filed
+            setHistoryValues(sb, input, output);
+        }
+
     }
 
     public void radioOnClick(View v){
@@ -99,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setHistoryValues(StringBuilder sb, String in, String out){
-            String from = "";
-            String to = "";
+            String from;
+            String to;
             if(fromMiles){
                 from = "Mi";
                 to = "Km";
@@ -123,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString("HISTORY", historyField.getText().toString());
         outState.putString("INPUT", userInput.getText().toString());
+        outState.putBoolean("UNIT", fromMiles);
         super.onSaveInstanceState(outState);
     }
 
@@ -131,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
         historyField.setText(savedInstanceState.getString("HISTORY"));
         userInput.setText(savedInstanceState.getString("INPUT"));
+        fromMiles = savedInstanceState.getBoolean("UNIT");
         sb.append(savedInstanceState.getString("HISTORY"));//restore the StringBuilder
     }
 }
