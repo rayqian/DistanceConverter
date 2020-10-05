@@ -1,5 +1,6 @@
 package com.example.distanceconverter;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView historyField;
     private boolean fromMiles = true;//use a boolean value to determine the conversion direction
     private StringBuilder sb = new StringBuilder();
+    //private String history = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,4 +119,18 @@ public class MainActivity extends AppCompatActivity {
         historyField.setText(sb.toString());
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString("HISTORY", historyField.getText().toString());
+        outState.putString("INPUT", userInput.getText().toString());
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        historyField.setText(savedInstanceState.getString("HISTORY"));
+        userInput.setText(savedInstanceState.getString("INPUT"));
+        sb.append(savedInstanceState.getString("HISTORY"));//restore the StringBuilder
+    }
 }
