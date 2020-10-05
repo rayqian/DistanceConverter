@@ -2,4 +2,13 @@
     <string name="app_name">DistanceConverter</string>
     <string name="K_value_String">Kilometers value:</string>
     <string name="M_value_String">Miles value:</string>
+    <string name="convert">CONVERT</string>
+    <string name="miles_to_kilometers">Miles To Kilometers</string>
+    <string name="kilometers_to_miles">Kilometers to Miles</string>
+    <string name="value2">value2</string>
+    <string name="value1">value1</string>
+    <string name="conversion_history">Conversion History:</string>
+    <string name="clear">CLEAR</string>
+    <string name="conversion">Conversion:</string>
+    <string name="enter_here">enter here</string>
 </resources>
